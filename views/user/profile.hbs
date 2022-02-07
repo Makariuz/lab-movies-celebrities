@@ -1,0 +1,21 @@
+<h1> User Profile </h1>
+
+<h2> Hello {{user.username}}, this is your profile!</h2>
+
+<p>Email: {{user.email}}</p>
+<p><input type="password" value="{{userpas}}" id="myInput">
+<input type="checkbox" onclick="myFunction()"> Show Password
+</p>
+
+{{!-- testing the below to show password --}}
+
+<script>
+    function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>

@@ -1,5 +1,10 @@
-{{#each celebs}}
+<h2>ALL THE CELEBRITIES</h2>
+
 <ul>
-    <li>{{this.name}}</li>
+  {{#each allCelebrities}}
+      <li>{{ this.name }}</li>
+  {{/each}}
 </ul>
-{{/each}}
+<hr>
+
+<a href="/"><button>Back to home</button></a>

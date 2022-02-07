@@ -1,11 +1,18 @@
-//  Add your code here
-const mongoose = require('mongoose')
+// models/Celebrity.model.js
 
-const celebSchema = new mongoose.Schema({
+const { Schema, model } = require("mongoose");
+
+const celebritySchema = new Schema(
+  {
     name: String,
     occupation: String,
-    catchPhrase: String,
-})
+    catchPhrase: String
+  },
+  {
+    timestamps: true
+  }
+);
 
-//export the post model to be used externally 
-module.exports = mongoose.model('Celeb', celebSchema)
+const Celebrity = model("Celebrity", celebritySchema);
+
+module.exports = Celebrity;

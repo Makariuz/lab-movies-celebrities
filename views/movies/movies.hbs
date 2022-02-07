@@ -1,5 +1,10 @@
-{{#each movies}}
+<h1>ALL THE MOVIES</h1>
+
 <ul>
-    <a href="/movies/movies/{{this.id}}"><li>{{this.title}}</li></a>
+  {{#each allMovies}}
+      <li><a href="/movies/{{this._id}}">{{ this.title }}</a></li>
+  {{/each}}
 </ul>
-{{/each}}
+<hr>
+
+<a href="/"><button>Back to home</button></a>
