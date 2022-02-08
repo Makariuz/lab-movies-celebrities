@@ -31,12 +31,12 @@ router.post('/login', async (req,res) => {
         const isPwCorrect = await bcrypt.compare(req.body.password, user.password)
         if(isPwCorrect) {
             req.session.currentUser = user
-            res.render('./user/profile', { user })
+            res.render('user/profile', { user })
         } else {
-            res.render('./user/login', {message: 'The password is incorrect'})
+            res.render('user/login', {message: 'The password is incorrect'})
         }
     } else {
-        res.render('./user/login', {message: 'No user found'})
+        res.render('user/login', {message: 'No user found'})
     }
 })
 

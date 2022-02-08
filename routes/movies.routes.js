@@ -3,13 +3,15 @@
 const router = require("express").Router();
 const Celebrity = require("../models/Celebrity.model");
 const Movie = require("../models/Movie.model");
+const {isLoggedIn} = require('../middleware/guard')
+
 
 // all your routes here
 
 // ***** (C)REATE ROUTES *****
 
 // GET '/movies/create' route to show movie creation form to the user
-router.get('/create', (req, res, next) => {
+router.get('/create',isLoggedIn, (req, res, next) => {
   // to render the create form we fetch all celebrities from the DB, so we can make the user select which celebrities will be in the cast of the movie
   Celebrity.find()
   .then( (allCelebrities) => res.render('movies/new-movie.hbs', { allCelebrities }))
@@ -28,7 +30,7 @@ router.post('/create', (req, res, next) => {
 // ***** (R)EAD ROUTES *****
 
 // GET '/movies' route to show all movies in a list
-router.get('/', (req, res, next) => {
+router.get('/',isLoggedIn, (req, res, next) => {
   Movie.find()
   .then( (allMovies) => res.render('movies/movies.hbs', { allMovies }))
   .catch( (err) => next(err));

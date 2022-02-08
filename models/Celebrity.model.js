@@ -10,6 +10,9 @@ const celebritySchema = new Schema(
   },
   {
     timestamps: true
+  },
+  {
+    author: { type: Schema.Types.ObjectId, ref: 'User', required: true }
   }
 );
 

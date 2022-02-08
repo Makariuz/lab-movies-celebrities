@@ -2,21 +2,23 @@
 
 const router = require("express").Router();
 const Celebrity = require("../models/Celebrity.model");
+const {isLoggedIn} = require('../middleware/guard')
 
 // all your routes here
 
 // ***** (C)REATE ROUTES *****
 
 // GET '/celebrities/create' route to show celebrity creation form to the user
-router.get('/create', (req, res, next) => {
+router.get('/create', isLoggedIn, (req, res, next) => {
   res.render('celebrities/new-celebrity.hbs'); // in res.render() we never start with '/'. Physical path to hbs file
 });
 
 // POST '/celebrities/create' route to create a new celebrity in the DB
 router.post('/create', (req, res, next) => {
   const { name, occupation, catchPhrase } = req.body
-  
-  Celebrity.create({ name, occupation, catchPhrase })
+  req.body.author = req.session.currentUser._id
+  //console.log(req.body.author)
+  Celebrity.create({ name, occupation, catchPhrase})
   .then( () => res.redirect('/celebrities'))
   .catch( (err) => res.render('celebrities/new-celebrity.hbs'));
 })
@@ -24,7 +26,7 @@ router.post('/create', (req, res, next) => {
 // ***** (R)EAD ROUTES *****
 
 // GET '/celebrities' to show all celebrities in a list
-router.get('/', (req, res, next) => {
+router.get('/',isLoggedIn, (req, res, next) => {
   Celebrity.find()
   .then( (allCelebrities) => res.render('celebrities/celebrities.hbs', { allCelebrities }))
   .catch( (err) => next(err));
